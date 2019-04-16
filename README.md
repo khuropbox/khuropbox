@@ -49,7 +49,7 @@ $ source env/bin/activate
 $ pip3 install -r requirement.txt
 
 $ python manage.py migrate
-$ python manage.py runserver
+$ python manage.py runserver 0:8000
 ```
 
 
