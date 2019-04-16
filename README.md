@@ -39,7 +39,14 @@
 
 ```shell
 $ git clone https://github.com/khuropbox/khuropbox && cd khuropbox
-$ pip pip install -r requirements.txt
+$ sudo apt install virtualenv python3-pip
+$ pip3 install virtualenv
+
+$ ln -s /home/ubuntu/.local/bin/virtualenv virtualenv
+$ ./virtualenv env
+$ source env/bin/activate
+
+$ pip3 install -r requirement.txt
 
 $ python manage.py migrate
 $ python manage.py runserver
