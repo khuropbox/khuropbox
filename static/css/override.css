@@ -1,0 +1,50 @@
+dt, kbd kbd, label {
+   font-weight: normal !important; /* font-weight: 700; */
+}
+
+.navbar-inverse {
+    background-color: transparent;  /* background-color: #222; */
+    border-color: transparent; /* border-color: #090909; */
+}
+
+.dropdown-header, .dropdown-menu>li>a {
+    padding: 10px 30px 10px 15px !important; /* padding: 3px 20px; */
+}
+
+li.dropdown .dropdown-menu>li>a {
+    color: #dddddd !important; /* color: #333; */
+}
+
+.dropdown-header {
+    color: #dddddd !important; /* color: #222; */
+}
+
+.nav .open>a, .nav .open>a:focus, .nav .open>a:hover{
+	background-color: transparent !important;/* background-color: #eee; */
+}
+
+.form-group{
+	overflow: hidden;
+}
+
+.pagination{
+	margin: 0;/* margin: 22px 0; */
+}
+
+.pagination>li>a, .pagination>li>span {
+	color: #333; /* color: #3097D1; */
+}
+
+a {
+	color: green;/* color: #3097D1; */
+}
+
+.dropzone{
+	min-height: 0px !important; /* min-height: 150px; */
+	border: 1px solid rgba(0,0,0,0.3) !important;
+	margin-bottom: 10px !important;
+}
+
+a.no-uline { text-decoration:none }
+
+a.noul:hover { text-decoration:none !important }

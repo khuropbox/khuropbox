@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>KHUropBox</title>
+    <link href="/static/css/app.css" rel="stylesheet">
+    <link href="/static/css/common.css" rel="stylesheet">
+    <link href="/static/css/override.css" rel="stylesheet">
+    <link href="/static/css/layout.css" rel="stylesheet">
+
+    <script src="/static/js/app.js"></script>
+
+</head>
+<body>
+
+    <div id="wrapper">
+        <div id="page-content-wrapper">
+
+             <div id="header">
+                <div id="logo">
+                    <a href="/"></a>
+                </div>
+             </div>
+
+             <div id="content">
+                {% block content %}
+                {% endblock %}
+             </div>
+      </div>
+  </div>
+
+</body>

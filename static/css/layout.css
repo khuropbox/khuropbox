@@ -1,0 +1,195 @@
+#wrapper{
+	min-height: 100%; 
+}
+
+#wrapper #header {
+	padding-top: 10px;
+	height: 80px;
+	text-align:center;
+}
+
+
+#wrapper #header #logo, #logo{
+	width: 120px;
+	height: 100%;
+	background-size: cover;
+	background-image: url('/static/image/header.png');
+	background-repeat: no-repeat;
+	background-size: contain;
+	margin: auto;
+	overflow: hidden;
+}
+
+#wrapper #header #logo > a{
+	display: block;
+	height: 100%;
+}
+
+
+#wrapper #content {
+	padding-top: 20px;
+	padding-bottom:30px; /* this needs to be bigger than footer height*/
+}
+
+/* footer */
+#footer{
+	position: relative;
+	margin-top: -30px; /* negative value of footer height */
+	height: 30px;
+	clear:both;
+	color: white;
+	padding: 0px 20px;
+}
+
+#footer #address{
+	float: left;
+	clear: left;
+}
+
+#footer #sponsor{
+	float: right;
+	clear: right;
+}
+
+#footer #sponsor img{
+	vertical-align:top;
+	height:14px;
+	margin-top:5px
+}
+
+#footer a{
+	color:inherit;
+	text-decoration:none;
+}
+
+#wrapper #footer #sponsor a{
+	margin-left:15px;
+}
+
+
+#numberbox{
+	padding: 1px 4px;
+    background: #dddddd;
+    color: #000;
+}
+
+#logout{
+	position: relative;
+	width:88px; height:40px;
+	font-size: 0.85em;
+	padding: 4px;
+    background: #2ab27b;
+    color: #fff;
+}
+
+/* 404 페이지 */
+#error{
+	color: #fff;
+	font-size:10em;
+	text-align: center;
+	margin-top:70px;
+}
+
+/* welcome 페이지 */
+#welcome{
+	color: #fff;
+	font-size:3.7em;
+	text-align: center;
+	margin-top:130px;
+}
+
+#alert{
+	padding-left:10px;
+	padding-right:10px;
+}
+
+.target {
+	display: inline-block;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media only screen and (max-width:800px){
+	#wrapper{
+		min-height: 96%;
+	}
+	#wrapper #content{padding-top: 0px;}
+	#wrapper #header #logo{
+		margin-top: 5px;
+		width: 80px;
+	}
+	
+	#wrapper #header #logo > a{
+		height: 50px;
+	}
+	
+	#footer{
+		padding: 0px;
+	}
+	
+	#footer #address, #sponsor{
+		float: right;
+		clear: right;
+		font-size: 0.9em;
+	}
+	
+	#error{
+		font-size:10em;
+		text-align: center;
+		margin-top:40px;
+	}
+
+	#welcome{
+		font-size:2.1em;
+		text-align: center;
+		margin-top:60px;
+	}
+	
+	#alert{
+		padding-top:5px;
+		padding-left:10px;
+	}
+}
+
+.group-list:hover{
+	border-color: #259d6d;
+}
+
+.group-list:hover .panel-heading{
+	border-color: #259d6d;
+	background-color: #2ab27b !important;
+	color: white;
+}
+
+.free-list:hover{
+	border-color: #31708f;
+}
+
+.free-list:hover .panel-heading{
+	border-color: #31708f;
+	background-color: #31708f !important;
+	color: white;
+}
+
+
+.notice-list:hover{
+	border-color: #8a6d3b;
+}
+
+.notice-list:hover .panel-heading{
+	border-color: #8a6d3b;
+	background-color: #8a6d3b !important;
+	color: white;
+}
+
+#htmlviewer img{
+	width: 100% !important;
+}
+
+#thumnail img{
+	width: 100% !important;
+	height: 300px !important;
+}
+

@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+     <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                {{ request.user.username }}님 안녕하세요.
+                <span>
+                    <button type="submit" class="btn" onclick="location.href='logout/';">로그아웃</button>
+                </span>
+            </div>
+            <div class="panel-body">
+
+                TODO
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
