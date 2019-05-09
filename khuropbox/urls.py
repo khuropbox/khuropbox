@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf.urls import include, url
+
 from khuropbox import views
 urlpatterns = [
     path('', views.index, name='index'),
@@ -26,4 +28,7 @@ urlpatterns = [
 
     path('admin/', admin.site.urls, name='admin'),
     #path('user/', include('user.urls'), name='user'),
+
+    url(r'^' + settings.S3_BROWSER_SETTINGS + '/', include('djangoS3Browser.s3_browser.urls')),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
