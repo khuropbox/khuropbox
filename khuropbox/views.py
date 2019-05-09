@@ -18,7 +18,7 @@ def login(request):
         if request.method == "POST":
             if not all(i in request.POST for i in ('username', 'password')):
                 return render(request, "login.html", {
-                    "message": "아이디와 비밀번호를 입력 해 주세요"
+                    "message": "아이디와 비밀번호를 입력해 주세요"
                 })
             user = authenticate(username=request.POST['username'], password=request.POST['password'])
             if user is not None:
@@ -45,7 +45,7 @@ def register(request):
                 return render(request, 'register.html', {
                     "message": '이미 존재하는 아이디입니다.'
                 })
-            if User.objects.filter(username=request.POST['email']).count():
+            if User.objects.filter(email=request.POST['email']).count():
                 return render(request, 'register.html', {
                     "message": '이미 존재하는 이메일입니다.'
                 })
@@ -57,7 +57,8 @@ def register(request):
                 last_name=request.POST['last_name'],
                 email=request.POST['email']
             )
-            return render(request, 'index.html')
+
+            return redirect('/')
         else:
             return render(request, 'register.html', {
                 "message": '모든 항목을 입력해주세요.'
