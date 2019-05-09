@@ -76,7 +76,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
             'libraries': {
-                's3-load': 'djangoS3Browser.templatetags.s3-tagsd'
+                's3-load': 'djangoS3Browser.templatetags.s3-tags'
             },
         },
     },
