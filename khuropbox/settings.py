@@ -36,8 +36,6 @@ APPEND_SLASH=False
 
 
 INSTALLED_APPS = [
-    'djangoS3Browser',
-
     'rest_framework',
     'django.contrib.auth',
     'django.contrib.admin',
@@ -47,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'djangoS3Browser'
 ]
 
 MIDDLEWARE = [
@@ -76,7 +75,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
             'libraries': {
-                's3-load': 'djangoS3Browser.templatetags.s3-tags'
+                's3-load': 'djangoS3Browser.templatetags.s3-tags',
             },
         },
     },
@@ -138,13 +137,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 
-MEDIA_URL = '/uploads/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
-
 AWS_ACCESS_KEY_ID = config['aws']['AWS_ACCESS_KEY_ID']
 AWS_SECRET_ACCESS_KEY = config['aws']['AWS_SECRET_ACCESS_KEY']
 AWS_STORAGE_BUCKET_NAME = config['aws']['AWS_STORAGE_BUCKET_NAME']
-AWS_SESSION_TOKEN = config['aws']['AWS_SESSION_TOKEN']
 AWS_AUTO_CREATE_BUCKET = True
 AWS_QUERYSTRING_AUTH = False
 S3_BROWSER_SETTINGS = 'djangoS3Browser'
