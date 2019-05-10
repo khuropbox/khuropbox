@@ -54,6 +54,47 @@ $ python manage.py runserver 0:8000
 
 
 
+## 개발 환경 설정 방법
+
+1. `Ubuntu Server 16.04 LTS (HVM), SSD Volume Type`으로 ec2를 만듭니다.
+
+2. ec2 보안 그룹의 8000번 포트를 열어 줍니다.
+
+3. `ssh -i your_pem_key.pem ubuntu@server_ip` 
+
+4. `$ git clone -b dev --single-branch https://github.com/khuropbox/khuropbox`
+
+5. `$ sudo apt-get update`
+
+6. `$ sudo apt install virtualenv python3-pip`
+
+7. `$ pip3 install virtualenv`
+
+8. `$ ln -s /home/ubuntu/.local/bin/virtualenv virtualenv`
+
+9. `$ ./virtualenv env`
+
+10. `$ source env/bin/activate`
+
+11. `$ pip3 install -r requirement.txt`
+
+12. `$ vim config.ini`
+
+    ```ini
+    [aws]
+    AWS_ACCESS_KEY_ID = your_access_key
+    AWS_SECRET_ACCESS_KEY = your_secret_access_key
+    AWS_STORAGE_BUCKET_NAME = bucket_name
+    ```
+
+13. `$ python manage.py migrate`
+
+14. `$ python manage.py runserver 0:8000`
+
+15. 크롬 창에서 `serverip:8000` 으로 접속하면 됩니다.
+
+
+
 ## Dependancy
 
 - django==2.1.7
