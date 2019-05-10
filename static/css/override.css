@@ -48,3 +48,5 @@ a {
 a.no-uline { text-decoration:none }
 
 a.noul:hover { text-decoration:none !important }
+
+.navbar-collapse.in { overflow-y: hidden !important; }
