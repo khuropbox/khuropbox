@@ -1,4 +1,6 @@
 {% extends 'layout.html' %}
+{% load s3-tags %}
+
 {% block content %}
 
      <div class="col-md-8 col-md-offset-2">
@@ -8,7 +10,7 @@
                     <button type="submit" class="btn right" onclick="location.href='/logout/';">로그아웃</button>
             </div>
             <div class="panel-body">
-                {% load s3-tags %}
+
                 {% load_s3 %}
 
             </div>
