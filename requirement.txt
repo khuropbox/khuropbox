@@ -1,3 +1,4 @@
 django==2.1.7
 Pillow==5.4.1
 djangorestframework==3.9.2
+boto3==1.9.145
