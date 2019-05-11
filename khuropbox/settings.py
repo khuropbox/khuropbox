@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'djangoS3Browser'
+    'djangoS3Browser',
+    'blog'
 ]
 
 MIDDLEWARE = [

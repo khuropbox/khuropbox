@@ -1,0 +1,32 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <div class="post">
+        {% if post.published_date %}
+              <div class="date">
+                 {{ post.published_date }}
+              </div>
+        {% else %}
+             <a class="btn btn-default" href="{% url 'post_publish' pk=post.pk %}">Publish</a>
+        {% endif %}
+            {% if user.is_authenticated %}
+                <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+                <a class="btn btn-default" href="{% url 'post_remove' pk=post.pk %}">Remove</a>
+            {% endif %}
+
+        <h1>{{ post.title }}</h1>
+        <p>{{ post.text|linebreaksbr }}</p>
+    </div>
+    <hr>
+    <a class="btn btn-default" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
+    {% for comment in post.comments.all %}
+        <div class="comment">
+            <div class="date">{{ comment.created_date }}</div>
+            <strong>{{ comment.author }}</strong>
+            <p>{{ comment.text|linebreaks }}</p>
+        </div>
+        {% empty %}
+        <p>No comments here yet :(</p>
+    {% endfor %}
+    <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.comments.count }}</a>
+{% endblock %}
