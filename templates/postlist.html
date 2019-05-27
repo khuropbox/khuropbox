@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                {% if user.is_authenticated %}
+                    {{ request.user.username }}  님 안녕하세요.
+                    <button type="submit" class="btn right" onclick="location.href='/logout/';">로그아웃</button>
+                    <button type="submit" class="btn right" onclick="location.href='/';">Khuropbox</button>
+                    <button type="submit" class="btn right" onclick="location.href='/blog/post/new/';">글쓰기</button>
+                    <button type="submit" class="btn right" onclick="location.href='/blog/';">글목록</button>
+                {% else %}
+                    <button type="submit" class="btn right" onclick="location.href='/login/';">로그인</button>
+                {% endif %}
+            </div>
+            <div class="panel-body">
+
+                {% for post in posts %}
+                    <a href="post/{{ post.pk }}/">
+                        <div class="panel panel-success group-list">
+                            <div class="panel-heading">
+                                {{ post.title }}
+                                <span style="float:right;">
+                                    작성 일시 : {{ post.created_date }}
+                                </span>
+                            </div>
+                            <div class="panel-body">
+                                {{ post.text|linebreaksbr }}
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

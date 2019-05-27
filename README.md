@@ -103,9 +103,6 @@ $ python manage.py runserver 0:8000
 
 15. 크롬 창에서 `serverip:8000` 으로 접속하면 됩니다.
 
-**개발 시 본인이 맡은 브랜치는 본인의 이니셜로 만들어 개발 후 브랜치로 push후 master 브랜치에는 Pull Request로 주세요.**
-
-
 
 ## Dependancy
 

@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                {{ request.user.username }}  님 안녕하세요.
+                <button type="submit" class="btn right" onclick="location.href='/logout/';">로그아웃</button>
+                <button type="submit" class="btn right" onclick="location.href='/';">Khuropbox</button>
+                <button type="submit" class="btn right" onclick="location.href='/blog/post/new/';">글쓰기</button>
+                <button type="submit" class="btn right" onclick="location.href='/blog/';">글목록</button>
+            </div>
+            <div class="panel-body">
+
+                <div class="panel panel-default">
+
+                    <div class="panel-heading">
+                        <h3 style="display: inline;">{{ post.title }}</h3>
+                        {% if user.is_authenticated %}
+                            <span style="float: right;">
+                                <a class="btn btn-default" href="{% url 'edit' pk=post.pk %}">글수정</a>
+                                <a class="btn btn-default" href="{% url 'remove' pk=post.pk %}">글삭제</a>
+                            </span>
+                        {% endif %}
+                    </div>
+                    <div class="panel-body" style="padding-bottom: 20px;">
+                        {{ post.text|linebreaksbr }}
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <a href="post/{{ post.pk }}/">Comments: {{ post.comments.count }}</a>
+                            <a class="btn btn-default" href="{% url 'commentadd' pk=post.pk %}">댓글 달기</a>
+                        </div>
+                        <div class="panel-body">
+                            {% for comment in post.comments.all %}
+                                <div class="comment">
+                                    <div class="date">작성일시 {{ comment.created_date }}</div>
+                                    <strong>작성자 {{ comment.author }}</strong>
+                                    <p>{{ comment.text|linebreaks }}</p>
+                                </div>
+                                {% empty %}
+                                <p>아직 댓글이 없습니다.</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
