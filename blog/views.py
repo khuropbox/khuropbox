@@ -54,10 +54,10 @@ def commentadd(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
         form = CommentForm(request.POST)
-        print(form)
         if form.is_valid():
+            print(request.path)
             comment = form.save(commit=False)
             comment.post = post
             comment.save()
-            return redirect('/blog/post/')
+            return redirect(request.path.replace('comment/', ''))
     return render(request, 'commentadd.html')
