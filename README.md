@@ -17,17 +17,27 @@
 
 - [x] 로그인, 회원가입  
 
-- [ ] 비밀번호 수정
+- [x] 비밀번호 수정
 
-- [ ] S3 기반 파일 업로드, 삭제
+- [x] S3 기반 파일 업로드, 삭제
 
-- [ ] AWS 플랫폼 DB 기반(MySQL 예정) migration 연동
+- [x] AWS 플랫폼 DB 기반(MySQL 예정) migration 연동
 
 - [ ] 외부인과 파일 공유, Session Problem
 
 - [ ] 도커 가상화(Dockerfile) 예정
 
 - [ ] Elastic Beanstalk와 Elastic Load Balancing을 사용한 부하분산처리
+
+- [ ] 게시판 및 댓글 기능, DB 구조화
+
+- [ ] S3에서 파일 이름으로 인한 검색
+
+- [ ] 사용자 마다 Bucket 나누기, 회원가입시 고유 Bucket 생성
+
+- [ ] S3 Bucket에 대한 DB 구조화
+
+- [ ] 대용량 파일 업로드에 대한 aws cognito 설정
 
   
 
@@ -94,7 +104,6 @@ $ python manage.py runserver 0:8000
 15. 크롬 창에서 `serverip:8000` 으로 접속하면 됩니다.
 
 
-
 ## Dependancy
 
 - django==2.1.7
@@ -106,6 +115,6 @@ $ python manage.py runserver 0:8000
 ## Team Members
 
 - 정다은
-- 정의동
+- 정의동 
 - 정태환(@graykode)
 - 조아진
