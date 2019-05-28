@@ -221,7 +221,7 @@
 </script>
 <script>
     $(document).ready(function () {
-        $('.progress').hide();
+        //$('.progress').hide();
         get_files("-");
     });
 
@@ -347,7 +347,7 @@
         selected_file_list = [];
         $('#top_folder').attr("data-top_folder", $('#location').attr("data-location"));
         $('#location').attr("data-location", main_folder);
-        
+
         $('#current').html('현재 위치 ' + main_folder);
 
         $(".pb-filemng-template-body").empty();
