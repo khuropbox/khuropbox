@@ -156,3 +156,21 @@ def delete(file_list):
     except Exception as e:
         print('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
         raise Exception('Delete Failed! ', e)
+
+def search(location, file_name):
+    try:
+        if location[-1] != "/":
+            key = (location[1:] += "/") + file_name
+        else:
+            key = locaion[1:] + file_name
+        result = s3client.list_objects(Bucket=settings.AWS_STORAGE_BUCKET_NAME, Prefix=key, Delimiter="/")
+        if len(result) == 0: # 일치하는 파일 존재하지 않음
+            print('No such file!')
+            return null
+        else:   # 일치하는 파일 존재
+            sort_a_z = True if sort_a_z == "true" else False  # sorted method a to z/ z to a
+            result_file = get_files(location, result.get('Contents'), sort_a_z) if result.get('Contents') else []
+            return result_file  # return file
+    except Exception as e:
+        print('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
+        raise Exception('Search Failed! ', e)

@@ -29,4 +29,5 @@ urlpatterns = [
     url(r'^paste_file/$', views.paste_file, name='paste_file'),
     url(r'^move_file/$', views.move_file, name='move_file'),
     url(r'^delete_file/$', views.delete_file, name='delete_file'),
+    url(r'^search_file/$', views.search_file, name='search_file'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

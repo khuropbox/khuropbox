@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.core.exceptions import PermissionDenied
 
 import django
+import boto3
 
 def index(request):
     if request.user.is_authenticated:
@@ -58,6 +59,23 @@ def register(request):
                 email=request.POST['email']
             )
 
+            # 버킷 이름 설정
+            bucket_name = "khuropbox-" + User.username
+
+            # S3 클라이언트 및 버킷 생성
+            s3 = boto3.client('s3', region_name='ap-northeast-2')
+            s3.create_bucket(Bucket=bucket_name, CreateBucketConfiguration={'LocationConstraint': 'ap-northeast-2'})
+
+            # CORS CreateBucketConfiguration 설정
+            cors_configuration = {
+                'CORSRules':[{
+                    'AllowedOrigins':['*'],
+                    'AllowedMethods':['POST', 'GET'],
+                    'AllowedHeaders':['*'],
+                }]
+            }
+            s3.put_bucket_cors(Bucket=bucket, CORSConfiguration=cors_configuration)
+
             return redirect('/')
         else:
             return render(request, 'register.html', {
@@ -65,4 +83,3 @@ def register(request):
             })
     else:
         return render(request, 'register.html')
-

@@ -60,3 +60,7 @@ def move_file(request):
 def delete_file(request):
     delete(request.POST.getlist('file_list[]'))
     return HttpResponse(json.dumps("OK"), content_type="application/json", status=200)
+
+def search_file(request):
+    json_string = search(request.POST['loc'], request.POST['file_name'])
+    return HttpResponse(json.dumps(json_string), content_type="application/json", status=200)
