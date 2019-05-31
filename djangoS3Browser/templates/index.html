@@ -43,6 +43,12 @@
 {#                        <li><a href="#"><span class="fa fa-upload fa-lg" data-toggle="collapse"#}
 {#                                              data-target="#collapseUpload" title="{% trans "Upload" %}"></span></a>#}
                         </li>
+
+                        <li><a href="#"><span class="fa fa-search fa-lg" data-toggle="collapse"
+                                              data-target="#collapseSearchFile"
+                                              title="{% trans "File Search" %}"></span></a></li>
+                        </li>
+
                         <li><a href="javascript:;" onclick="copy_selected_file();"><span class="fa fa-lg fa-files-o"
                                                                                          title="{% trans "Copy Select Files" %}"></span></a>
                         </li>
@@ -89,6 +95,23 @@
                         </div>
                     </div>
                 </div>
+
+                <!--Search File-->
+                <div class="collapse" id="collapseSearchFile">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <input class="form-control" id="searched_folder_name"
+                                           placeholder="{% trans "File Name" %}">
+                                </div>
+                                <button type="button" class="btn btn-sm btn-primary"
+                                        onclick="search_folder()">{% trans "Search" %}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!--File Upload-->
                 <div id="collapseUpload">
                     <div class="panel panel-default">
@@ -238,6 +261,44 @@
         });
         $('#collapseCreateFolder').collapse("hide");
         refresh_folder();
+    }
+
+    function search_folder() {
+        var main_folder = $('#location').attr("data-location");
+        var file_name = $('#searched_folder_name').val();
+
+        $('#top_folder').attr("data-top_folder", $('#location').attr("data-location"));
+        $('#location').attr("data-location", main_folder);
+
+        $('#current').html('현재 위치 ' + main_folder);
+
+        $(".pb-filemng-template-body").empty();
+        var get_files_url = "{% url 'get_folder_items' "arg1djs3server" "sort_a_z" %}".replace(/arg1djs3server/, main_folder.toString()).replace(/sort_a_z/, sort_a_z_value);
+        $.getJSON(
+            get_files_url, function (files_list) {
+                for (var key in files_list) {
+                    if (files_list[key].text.indexOf(file_name) === -1) continue;
+
+                    target = "";
+                    if ('folder' != files_list[key].type) {
+                        target = 'target="_blank"';
+                    }
+                    $(".pb-filemng-template-body").append(
+                        '<div class="col-sm-2 pb-filemng-body-folders" onClick="select_file(this);" ondblclick="open_item(this);" ' +
+                        'data-toggle="tooltip" ondrop="drop_file(event)" ondragover="allowDrop_file(event)" ondragstart="dragstart_file(event)" ondragend="dragend_file(event)" draggable="true" title="' + files_list[key].text +
+                        '" data-url="' + files_list[key].url + '" data-type="' + files_list[key].type + '">' +
+                        '<img src="' + files_list[key].icon + '"/></a>' + '<br />' +
+                        '<p class="pb-filemng-paragraphs" >' + files_list[key].text + '</p>' +
+                        '<span class="fa check-file"></span>' +
+                        '<span class="hide location-info">' + main_folder + files_list[key].text + '</span>' +
+                        '</div>'
+                    );
+                }
+                if (1 > files_list.length) {
+                    $(".pb-filemng-template-body").append('<p style="text-align:center">{% trans "Folder is Empty" %}</p>');
+                }
+            });
+
     }
 
     function sort_a_z(d) {
