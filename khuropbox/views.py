@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.core.exceptions import PermissionDenied
 
 import django
+import warrant
 
 def index(request):
     if request.user.is_authenticated:
@@ -21,6 +22,8 @@ def login(request):
                     "message": "아이디와 비밀번호를 입력해 주세요"
                 })
             user = authenticate(username=request.POST['username'], password=request.POST['password'])
+            # cognito authentication needed
+            # authenticate with folder of user
             if user is not None:
                 auth = django.contrib.auth.login(request, user)
                 return redirect('/')
