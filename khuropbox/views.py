@@ -79,8 +79,8 @@ def register(request):
                         email=request.POST['email'],
                         UserAttributes=[
                             {
-                            'FirstName' : request.POST['first_name'],
-                            'LastName' : request.POST['last_name']
+                            'family_name' : request.POST['first_name'],
+                            'given_name' : request.POST['last_name']
                             },
                         ])
 
