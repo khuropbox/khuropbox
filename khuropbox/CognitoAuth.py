@@ -3,10 +3,10 @@ import boto3
 # https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cognito-idp.html#id108
 
 class Cognito():
-    region = 'ap-northeast-2'
-    user_pool_id = 'ap-northeast-2_mzexrHyOT'
-    app_client_id = '3mum9jtphuqbvmojfv0umhobc3'
-    identity_pool_id = 'ap-northeast-2:7355f3db-8b2a-4548-9a56-becce8221aee'
+    region = 'us-west-2'
+    user_pool_id = 'us-west-2_2wqn8wLUE'
+    app_client_id = '3dmp45h9ab12hglhrpb7rntea4'
+    identity_pool_id = 'us-west-2:bfca573d-3cfc-42c7-8310-ff9c0218101d'
     account_id = 'wjdekdms001'
     token = ''
     credential = {}
