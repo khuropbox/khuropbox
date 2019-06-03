@@ -51,7 +51,7 @@ def logout(request):
     return redirect("/")
 
 def register(request):
-    Cog = Cognito()
+    Cog = CognitoAuth.Cognito()
     if request.user.is_authenticated: raise PermissionDenied
     if request.method == "POST":
         require_keys = ('username', 'password', 'first_name', 'last_name', 'email')
