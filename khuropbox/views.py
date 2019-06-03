@@ -4,7 +4,6 @@ from django.shortcuts import render, redirect
 from django.core.exceptions import PermissionDenied
 
 import django
-import settings
 import CognitoAuth
 
 
