@@ -40,8 +40,8 @@ class Cognito():
         ci_client = boto3.client('cognito-identity', self.region)
         response = ci_client.get_id(AccountId=self.account_id,
                                 IdentityPoolId=self.identity_pool_id,
-                                Logins={'provider': self.token})
+                                Logins={provider: self.token})
 
         # Get Credentials
-        response = ci_client.get_credentials_for_identity(IdentityId=response['IdentityId'])
+        response = ci_client.get_credentials_for_identity(IdentityId=response['IdentityId'], Logins={provider: self.token})
         return response
