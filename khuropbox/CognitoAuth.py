@@ -5,7 +5,7 @@ import boto3
 class Cognito():
     region = 'us-west-2'
     user_pool_id = 'us-west-2_2wqn8wLUE'
-    app_client_id = '3dmp45h9ab12hglhrpb7rntea4'
+    app_client_id = '3qbuc7gaje6nftsqa7aduptnfn'
     identity_pool_id = 'us-west-2:bfca573d-3cfc-42c7-8310-ff9c0218101d'
     account_id = 'wjdekdms001'
     token = ''

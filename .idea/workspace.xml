@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="61578ee3-6856-4c4c-97ee-1449bea00bf8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/khuropbox/CognitoAuth.py" beforeDir="false" afterPath="$PROJECT_DIR$/khuropbox/CognitoAuth.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/khuropbox/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/khuropbox/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -88,8 +86,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/khuropbox/CognitoAuth.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="335">
-              <caret line="42" column="69" lean-forward="true" selection-start-line="42" selection-start-column="69" selection-end-line="42" selection-end-column="69" />
+            <state relative-caret-position="120">
+              <caret line="8" column="71" lean-forward="true" selection-start-line="8" selection-start-column="71" selection-end-line="8" selection-end-column="71" />
             </state>
           </provider>
         </entry>
@@ -274,7 +272,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1559266624414</updated>
-      <workItem from="1559266625770" duration="26630000" />
+      <workItem from="1559266625770" duration="26948000" />
     </task>
     <task id="LOCAL-00001" summary="bigger than 50MB/ multipart upload">
       <created>1559285839356</created>
@@ -360,11 +358,18 @@
       <option name="project" value="LOCAL" />
       <updated>1559565474133</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="region error fixed">
+      <created>1559566009726</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1559566009726</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26630000" />
+    <option name="totallyTimeSpent" value="26948000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="6" />
@@ -439,7 +444,8 @@
     <MESSAGE value="AWS Cognito Authentication" />
     <MESSAGE value="AWS Cognito Authentication Module Error Fixed" />
     <MESSAGE value="AWS Cognito Authentication Module Error Fixed 00" />
-    <option name="LAST_COMMIT_MESSAGE" value="AWS Cognito Authentication Module Error Fixed 00" />
+    <MESSAGE value="region error fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="region error fixed" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/templates/register.html">
@@ -584,8 +590,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/khuropbox/CognitoAuth.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="42" column="69" lean-forward="true" selection-start-line="42" selection-start-column="69" selection-end-line="42" selection-end-column="69" />
+        <state relative-caret-position="120">
+          <caret line="8" column="71" lean-forward="true" selection-start-line="8" selection-start-column="71" selection-end-line="8" selection-end-column="71" />
         </state>
       </provider>
     </entry>
