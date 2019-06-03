@@ -91,14 +91,14 @@ WSGI_APPLICATION = 'khuropbox.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': config['db']['ENGINE'],
-        'HOST': config['db']['HOST'],
-        'PORT': config['db']['PORT'],
-        'NAME': config['db']['NAME'],
-        'USER': config['db']['USER'],
-        'PASSWORD': config['db']['PASSWORD'],
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        # 'ENGINE': config['db']['ENGINE'],
+        # 'HOST': config['db']['HOST'],
+        # 'PORT': config['db']['PORT'],
+        # 'NAME': config['db']['NAME'],
+        # 'USER': config['db']['USER'],
+        # 'PASSWORD': config['db']['PASSWORD'],
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
