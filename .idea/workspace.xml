@@ -84,8 +84,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/khuropbox/CognitoAuth.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="470">
-              <caret line="46" column="23" lean-forward="true" selection-start-line="46" selection-start-column="23" selection-end-line="46" selection-end-column="23" />
+            <state relative-caret-position="384">
+              <caret line="40" column="62" lean-forward="true" selection-start-line="40" selection-start-column="62" selection-end-line="40" selection-end-column="62" />
             </state>
           </provider>
         </entry>
@@ -270,7 +270,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1559266624414</updated>
-      <workItem from="1559266625770" duration="28833000" />
+      <workItem from="1559266625770" duration="28204000" />
     </task>
     <task id="LOCAL-00001" summary="bigger than 50MB/ multipart upload">
       <created>1559285839356</created>
@@ -391,25 +391,11 @@
       <option name="project" value="LOCAL" />
       <updated>1559567410745</updated>
     </task>
-    <task id="LOCAL-00018" summary="Credential Error Fixed">
-      <created>1559567946032</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1559567946032</updated>
-    </task>
-    <task id="LOCAL-00019" summary="Credential Error Fixed01">
-      <created>1559568313644</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1559568313644</updated>
-    </task>
-    <option name="localTasksCounter" value="20" />
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28833000" />
+    <option name="totallyTimeSpent" value="28204000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="6" />
@@ -488,8 +474,7 @@
     <MESSAGE value="Cognito id Changed" />
     <MESSAGE value="Cognito pool id Changed" />
     <MESSAGE value="Credential Error Fixed" />
-    <MESSAGE value="Credential Error Fixed01" />
-    <option name="LAST_COMMIT_MESSAGE" value="Credential Error Fixed01" />
+    <option name="LAST_COMMIT_MESSAGE" value="Credential Error Fixed" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/templates/register.html">
@@ -634,8 +619,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/khuropbox/CognitoAuth.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="470">
-          <caret line="46" column="23" lean-forward="true" selection-start-line="46" selection-start-column="23" selection-end-line="46" selection-end-column="23" />
+        <state relative-caret-position="384">
+          <caret line="40" column="62" lean-forward="true" selection-start-line="40" selection-start-column="62" selection-end-line="40" selection-end-column="62" />
         </state>
       </provider>
     </entry>
