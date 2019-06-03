@@ -47,7 +47,6 @@ INSTALLED_APPS = [
 
     'djangoS3Browser',
     'blog',
-    'warrant'
 ]
 
 MIDDLEWARE = [
