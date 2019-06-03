@@ -177,42 +177,138 @@
             var data = new FormData();
             data.append("file", file[0]);
             data.append("loc", loc);
-            $.ajax({
-                xhr: function () {
-                    var xhr = new window.XMLHttpRequest();
-                    // Upload progress
-                    xhr.upload.addEventListener("progress", function (evt) {
-                        if (evt.lengthComputable) {
-                            var percentComplete = (evt.loaded / evt.total * 100 | 0);
-                            var progress_bar = document.getElementById("progress-bar");
-                            var progress_bar_rate = document.getElementById("progress-bar-rate");
-                            progress_bar.style.width = percentComplete + '%';
-                            progress_bar_rate.innerHTML = percentComplete + ' % ' + file[0].name;
-                        }
-                    }, false);
-                    return xhr;
-                },
-                url: '{% url "upload" %}',
-                contentType: false,
-                type: 'POST',
-                dataType: 'json',
-                processData: false,
-                data: data,
-                success: function (resultData) {
-                    document.getElementById("js-upload-finished-list").innerHTML = '<a href="#" ' +
-                        'class="list-group-item list-group-item-success">' +
-                        '<span class="badge alert-success pull-right"' +
-                        '>{% trans "Success" %}</span>' + file[0].name + '</a>';
-                    get_files(loc);
-                },
-                error: function (resultData) {
-                    document.getElementById("js-upload-finished-list").innerHTML = '<a href="#" ' +
-                        'class="list-group-item list-group-item-danger">' +
-                        '<span class="badge alert-danger pull-right"' +
-                        '>{% trans "Fail" %}</span>' + file[0].name + '</a>';
-                    get_files(loc);
+
+            if (file[0].size() > 52428800) // bigger than 50MB
+            {
+                var parts = file[0].size() / 5242880;
+                var bucketRegion = 'ap-southeast-1';
+                var IdentityPoolId = 'us-west-2:bfca573d-3cfc-42c7-8310-ff9c0218101d';
+
+                // make aws credential
+                // https://docs.aws.amazon.com/ko_kr/cognito/latest/developerguide/developer-authenticated-identities.html
+
+                AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+                    IdentityPoolId: IdentityPoolId,
+                    IdentityId: 'IDENTITY_ID_RETURNED_FROM_YOUR_PROVIDER',
+                    Logins: {
+                        'cognito-identity.amazonaws.com': 'TOKEN_RETURNED_FROM_YOUR_PROVIDER'
+                    }
+                });
+
+                // get S3 Bucket and do multipart upload
+                // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#uploadPart-property
+
+                var s3 = new AWS.S3({
+                    apiVersion: '2006-03-01',
+                    params: {Bucket: "khuropbox2015"}
+                });
+
+                var filekey = loc + file.name;
+
+                var params = {
+                    Bucket: "khuropbox2015",
+                    Key: filekey
+                };
+
+                // upload initiation
+
+                s3.createMultipartUpload(params, function (err, data) {
+                    if (err) console.log(err, err.stack); // an error occurred
+                    else console.log(data);           // successful response
+                });
+
+                var uploadID = data.UploadId;
+                /*
+                params = {
+                      //Body: <Binary String>, // needed to be edited
+                      Bucket: "khuropbox2015",
+                      Key: filekey,
+                      PartNumber: num,
+                      UploadId: uploadID,
+                     };
+
+                var filemulti = filemulti[0];
+
+                // uploading parts of file
+
+                for (var i = 0; i < parts; i++)
+                {
+                    s3.uploadPart(params, function(err, data) {
+                       if (err) console.log(err, err.stack); // an error occurred
+                       else     console.log(data);           // successful response
+                     });
+                    filemulti[i].append(data);
+                    // divide file into parts as 5MB size
                 }
-            });
+                */
+
+                 var params = {
+                  Bucket: "khuropbox2015",
+                  Key: filekey,
+                  UploadId: uploadID
+                 };
+
+                s3.listParts(params, function(err, data) {
+                   if (err) console.log(err, err.stack); // an error occurred
+                   else     console.log(data);           // successful response
+                 });
+                // list parts
+
+                params = {
+                    Bucket: "khuropbox2015",
+                    Key: filekey,
+                    MultipartUpload: {
+                    Parts: filemulti[0]
+                      },
+                    UploadId: uploadID
+                     };
+
+                // complete upload
+                s3.completeMultipartUpload(params, function(err, data) {
+                   if (err) console.log(err, err.stack); // an error occurred
+                   else     console.log(data);           // successful response
+                 });
+
+            }
+            else
+            {
+                $.ajax({
+                    xhr: function () {
+                        var xhr = new window.XMLHttpRequest();
+                        // Upload progress
+                        xhr.upload.addEventListener("progress", function (evt) {
+                            if (evt.lengthComputable) {
+                                var percentComplete = (evt.loaded / evt.total * 100 | 0);
+                                var progress_bar = document.getElementById("progress-bar");
+                                var progress_bar_rate = document.getElementById("progress-bar-rate");
+                                progress_bar.style.width = percentComplete + '%';
+                                progress_bar_rate.innerHTML = percentComplete + ' % ' + file[0].name;
+                            }
+                        }, false);
+                        return xhr;
+                    },
+                    url: '{% url "upload" %}',
+                    contentType: false,
+                    type: 'POST',
+                    dataType: 'json',
+                    processData: false,
+                    data: data,
+                    success: function (resultData) {
+                        document.getElementById("js-upload-finished-list").innerHTML = '<a href="#" ' +
+                            'class="list-group-item list-group-item-success">' +
+                            '<span class="badge alert-success pull-right"' +
+                            '>{% trans "Success" %}</span>' + file[0].name + '</a>';
+                        get_files(loc);
+                    },
+                    error: function (resultData) {
+                        document.getElementById("js-upload-finished-list").innerHTML = '<a href="#" ' +
+                            'class="list-group-item list-group-item-danger">' +
+                            '<span class="badge alert-danger pull-right"' +
+                            '>{% trans "Fail" %}</span>' + file[0].name + '</a>';
+                        get_files(loc);
+                    }
+                });
+            }
         };
 
         uploadForm.addEventListener('submit', function (e) {
