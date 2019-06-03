@@ -157,3 +157,4 @@ control = 'max-age=%d, s-maxage=%d, must-revalidate' % (AWS_EXPIRY, AWS_EXPIRY)
 AWS_HEADERS = {
     'Cache-Control': bytes(control, encoding='latin-1')
 }
+
