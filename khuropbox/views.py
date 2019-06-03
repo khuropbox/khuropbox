@@ -2,10 +2,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.shortcuts import render, redirect
 from django.core.exceptions import PermissionDenied
+from khuropbox import settings
+from khuropbox import CognitoAuth
 
 import django
-import settings
-import CognitoAuth
 
 
 def index(request):
