@@ -2,7 +2,7 @@ import boto3
 
 # https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cognito-idp.html#id108
 
-class Cognito():
+class Cognito:
     region = 'ap-northeast-2'
     user_pool_id = 'ap-northeast-2_mzexrHyOT'
     app_client_id = '3mum9jtphuqbvmojfv0umhobc3'
