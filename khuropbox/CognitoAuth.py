@@ -11,16 +11,16 @@ class Cognito():
     token = ''
     credential = {}
 
-    def sign_up(self, username, password, email, UserAttributes):
-        client = boto3.client('cognito-idp')
+    def sign_up(self, username, password, UserAttributes):
+        client = boto3.client('cognito-idp', self.region)
         response = client.sign_up(ClientId=self.app_client_id,
                                   Username=username,
                                   Password=password,
-                                  UserAttributes=[{'Name': 'email', 'Value': email}])
+                                  UserAttributes=UserAttributes)
         return response
 
     def confirm_sign_up(self, username, confirm_code):
-        client = boto3.client('cognito-idp')
+        client = boto3.client('cognito-idp', self.region)
         response = client.confirm_sign_up(ClientId=self.app_client_id,
                                           Username=username,
                                           ConfirmationCode=confirm_code)
@@ -28,7 +28,7 @@ class Cognito():
 
     def sign_in_admin(self, username, password):
         # Get ID Token
-        idp_client = boto3.client('cognito-idp')
+        idp_client = boto3.client('cognito-idp', self.region)
         response = idp_client.admin_initiate_auth(UserPoolId=self.user_pool_id,
                                               ClientId=self.app_client_id,
                                               AuthFlow='ADMIN_NO_SRP_AUTH',
@@ -38,7 +38,7 @@ class Cognito():
         self.token = response['AuthenticationResult']['IdToken']
 
         # Get IdentityId
-        ci_client = boto3.client('cognito-identity')
+        ci_client = boto3.client('cognito-identity', self.region)
         response = ci_client.get_id(AccountId=self.account_id,
                                 IdentityPoolId=self.identity_pool_id,
                                 Logins={provider: self.token})

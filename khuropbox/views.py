@@ -76,11 +76,18 @@ def register(request):
             Cog.sign_up(
                         username=request.POST['username'],
                         password=request.POST['password'],
-                        email=request.POST['email'],
                         UserAttributes=[
                             {
-                            'family_name' : request.POST['first_name'],
-                            'given_name' : request.POST['last_name']
+                                'Name' : 'email',
+                                'Value' : request.POST['email'],
+                            },
+                            {
+                                'Name' : 'family_name',
+                                'Value': request.POST['first_name'],
+                            },
+                            {
+                                'Name' : 'given_name',
+                                'Value': request.POST['last_name'],
                             },
                         ])
 
