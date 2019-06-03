@@ -43,6 +43,6 @@ class Cognito():
                                 Logins={provider: self.token})
 
         # Get Credentials
-        response = ci_client.get_credentials_for_identity(IdentityId=response['IdentityId'],
-                                                      Logins={'provider' : self.token})
+        #response = ci_client.get_credentials_for_identity(IdentityId=response['IdentityId'],
+                                                    #  Logins={'provider' : self.token})
         return response
