@@ -2,9 +2,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.shortcuts import render, redirect
 from django.core.exceptions import PermissionDenied
+from CognitoAuth import Cognito
 
 import django
-import CognitoAuth
+
 
 
 def index(request):
