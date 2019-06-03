@@ -27,9 +27,7 @@ urlpatterns = [
     path('logout/', views.logout, name='logout'),
 
     path('admin/', admin.site.urls, name='admin'),
-    path('blog/', include('blog.urls')),
     #path('user/', include('user.urls'), name='user'),
-
 
     url(r'^' + settings.S3_BROWSER_SETTINGS + '/', include('djangoS3Browser.s3_browser.urls')),
 
