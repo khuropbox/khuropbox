@@ -33,8 +33,7 @@ def login(request):
                 auth = django.contrib.auth.login(request, user)
 
                 cog = CognitoAuth.Cognito()
-                userCredential = cog.sign_in_admin(username=un, password=pw)
-                cog.SetUserCredential(userCredential)
+                cog.sign_in_admin(username=un, password=pw)
 
                 return redirect('/')
             else:

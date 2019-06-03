@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="61578ee3-6856-4c4c-97ee-1449bea00bf8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/khuropbox/CognitoAuth.py" beforeDir="false" afterPath="$PROJECT_DIR$/khuropbox/CognitoAuth.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/khuropbox/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/khuropbox/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,11 +17,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/khuropbox/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="263">
-              <caret line="77" column="24" selection-start-line="77" selection-start-column="24" selection-end-line="77" selection-end-column="24" />
+            <state relative-caret-position="361">
+              <caret line="52" column="31" lean-forward="true" selection-start-line="52" selection-start-column="31" selection-end-line="52" selection-end-column="31" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/djangoS3Browser/templates/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="370">
+              <caret line="190" column="18" lean-forward="true" selection-start-line="190" selection-start-column="18" selection-end-line="190" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -29,18 +40,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="210">
               <caret line="14" column="26" lean-forward="true" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="346">
-                <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
-              </first_editor>
-              <second_editor />
             </state>
           </provider>
         </entry>
@@ -86,8 +85,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/khuropbox/CognitoAuth.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="71" lean-forward="true" selection-start-line="8" selection-start-column="71" selection-end-line="8" selection-end-column="71" />
+            <state relative-caret-position="440">
+              <caret line="45" column="92" lean-forward="true" selection-start-line="45" selection-start-column="92" selection-end-line="45" selection-end-column="92" />
             </state>
           </provider>
         </entry>
@@ -272,7 +271,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1559266624414</updated>
-      <workItem from="1559266625770" duration="26948000" />
+      <workItem from="1559266625770" duration="27576000" />
     </task>
     <task id="LOCAL-00001" summary="bigger than 50MB/ multipart upload">
       <created>1559285839356</created>
@@ -365,11 +364,25 @@
       <option name="project" value="LOCAL" />
       <updated>1559566009726</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Cognito id Changed">
+      <created>1559566403538</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1559566403538</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Cognito pool id Changed">
+      <created>1559566634301</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1559566634301</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26948000" />
+    <option name="totallyTimeSpent" value="27576000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="6" />
@@ -445,7 +458,20 @@
     <MESSAGE value="AWS Cognito Authentication Module Error Fixed" />
     <MESSAGE value="AWS Cognito Authentication Module Error Fixed 00" />
     <MESSAGE value="region error fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="region error fixed" />
+    <MESSAGE value="Cognito id Changed" />
+    <MESSAGE value="Cognito pool id Changed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cognito pool id Changed" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/khuropbox/views.py</url>
+          <line>47</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/templates/register.html">
@@ -491,13 +517,6 @@
     <entry file="file://$PROJECT_DIR$/static/js/app.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/djangoS3Browser/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-228">
-          <caret line="251" column="13" lean-forward="true" selection-start-line="251" selection-start-column="13" selection-end-line="251" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/login.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
@@ -520,13 +539,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/khuropbox/wsgi.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/khuropbox/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
@@ -578,20 +590,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/khuropbox/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/khuropbox/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="77" column="24" selection-start-line="77" selection-start-column="24" selection-end-line="77" selection-end-column="24" />
+        <state relative-caret-position="361">
+          <caret line="52" column="31" lean-forward="true" selection-start-line="52" selection-start-column="31" selection-end-line="52" selection-end-column="31" />
           <folding>
             <element signature="e#0#43#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/djangoS3Browser/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="370">
+          <caret line="190" column="18" lean-forward="true" selection-start-line="190" selection-start-column="18" selection-end-line="190" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/khuropbox/CognitoAuth.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="71" lean-forward="true" selection-start-line="8" selection-start-column="71" selection-end-line="8" selection-end-column="71" />
+        <state relative-caret-position="440">
+          <caret line="45" column="92" lean-forward="true" selection-start-line="45" selection-start-column="92" selection-end-line="45" selection-end-column="92" />
         </state>
       </provider>
     </entry>

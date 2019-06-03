@@ -9,7 +9,6 @@ class Cognito():
     identity_pool_id = 'us-west-2:bfca573d-3cfc-42c7-8310-ff9c0218101d'
     account_id = 'wjdekdms001'
     token = ''
-    credential = {}
 
     def sign_up(self, username, password, UserAttributes):
         client = boto3.client('cognito-idp', self.region)
@@ -45,8 +44,5 @@ class Cognito():
 
         # Get Credentials
         response = ci_client.get_credentials_for_identity(IdentityId=response['IdentityId'],
-                                                      Logins={provider: self.token})
+                                                      Logins={'provider' : self.token})
         return response
-
-    def SetUserCredential(self, credential):
-        self.credential = credential
