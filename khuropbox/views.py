@@ -30,10 +30,10 @@ def login(request):
             user = authenticate(username=un, password=pw)
 
             if user is not None:
-                auth = django.contrib.auth.login(request, user)
+                #auth = django.contrib.auth.login(request, user)
 
                 cog = CognitoAuth.Cognito()
-                cog.sign_in_admin(username=un, password=pw)
+                auth = cog.sign_in_admin(username=un, password=pw)
 
                 return redirect('/')
             else:
