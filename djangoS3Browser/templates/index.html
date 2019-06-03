@@ -599,8 +599,8 @@
                         <li><a href="#"><span class="fa fa-folder fa-lg" data-toggle="collapse"
                                               data-target="#collapseCreateFolder"
                                               title="{% trans "Create Folder" %}"></span></a></li>
-{#                        <li><a href="#"><span class="fa fa-upload fa-lg" data-toggle="collapse"#}
-{#                                              data-target="#collapseUpload" title="{% trans "Upload" %}"></span></a>#}
+                        <li><a href="#"><span class="fa fa-upload fa-lg" data-toggle="collapse"
+                                              data-target="#collapseUpload" title="{% trans "Upload" %}"></span></a>
                         </li>
                         <li><a href="javascript:;" onclick="download_files();"><span class="fa fa-download fa-lg"
                                                                                      title="{% trans "Download Selected File" %}"></span></a>
@@ -627,7 +627,6 @@
                                     class="fa fa-chevron-left fa-lg"></span></a></li>
                             <li class="pb-filemng-active"><a href="javascript:;" onclick="get_files('-');"><span
                                     class="fa fa-home fa-lg"></span></a></li>
-                            <li id="current"></li>
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->
@@ -652,22 +651,27 @@
                     </div>
                 </div>
                 <!--File Upload-->
-                <div id="collapseUpload">
+                <div class="collapse" id="collapseUpload">
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <!-- Standar Form -->
+                            <h4>{% blocktrans %}Select files from your computer{% endblocktrans %}</h4>
                             <form action="" method="post" enctype="multipart/form-data" id="js-upload-form">
                                 <div class="form-inline">
                                     <div class="form-group">
                                         <input type="file" name="files[]" id="js-upload-files" multiple>
                                     </div>
                                     <button type="submit" class="btn btn-sm btn-primary"
-                                            id="js-upload-submit">{% trans "파일 업로드" %}
+                                            id="js-upload-submit">{% trans "Upload files" %}
                                     </button>
-                                    <br />
-                                    <br />
                                 </div>
                             </form>
+
+                            <!-- Drop Zone -->
+                            <h4>{% blocktrans %}Or drag and drop files below{% endblocktrans %}</h4>
+                            <div class="upload-drop-zone" id="drop-zone">
+                                {% blocktrans %}Just drag and drop files here{% endblocktrans %}
+                            </div>
 
                             <!-- Progress Bar -->
                             <div class="progress">
@@ -681,10 +685,10 @@
 
                             <!-- Upload Finished -->
                             <div class="js-upload-finished" id="js-upload-finished">
+                                <h3>{% trans "Processed files" %}</h3>
                                 <div class="list-group" id="js-upload-finished-list">
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -709,49 +713,51 @@
         var dropZone = document.getElementById('drop-zone');
         var uploadForm = document.getElementById('js-upload-form');
 
-        var startUpload = function (file) {
+        var startUpload = function (files) {
             var loc = $('#location').attr("data-location");
-            console.log(file[0].size, loc);
+            $.each(files, function (key, file) {
+                var data = new FormData();
+                data.append("file", file);
+                data.append("loc", loc);
+                $.ajax({
+                    xhr: function () {
+                        var xhr = new window.XMLHttpRequest();
+                        // Upload progress
+                        xhr.upload.addEventListener("progress", function (evt) {
+                            if (evt.lengthComputable) {
+                                var percentComplete = (evt.loaded / evt.total * 100 | 0);
+                                var progress_bar = document.getElementById("progress-bar");
+                                var progress_bar_rate = document.getElementById("progress-bar-rate");
+                                progress_bar.style.width = percentComplete + '%';
+                                progress_bar_rate.innerHTML = percentComplete + ' % ' + file.name;
+                            }
+                        }, false);
+                        return xhr;
+                    },
+                    url: '{% url "upload" %}',
+                    contentType: false,
+                    type: 'POST',
+                    dataType: 'json',
+                    processData: false,
+                    data: data,
+                    success: function (resultData) {
+                        document.getElementById("js-upload-finished-list").innerHTML += '<a href="#" ' +
+                            'class="list-group-item list-group-item-success">' +
+                            '<span class="badge alert-success pull-right"' +
+                            '>{% trans "Success" %}</span>' + file.name + '</a>';
 
-            var data = new FormData();
-            data.append("file", file[0]);
-            data.append("loc", loc);
-            $.ajax({
-                xhr: function () {
-                    var xhr = new window.XMLHttpRequest();
-                    // Upload progress
-                    xhr.upload.addEventListener("progress", function (evt) {
-                        if (evt.lengthComputable) {
-                            var percentComplete = (evt.loaded / evt.total * 100 | 0);
-                            var progress_bar = document.getElementById("progress-bar");
-                            var progress_bar_rate = document.getElementById("progress-bar-rate");
-                            progress_bar.style.width = percentComplete + '%';
-                            progress_bar_rate.innerHTML = percentComplete + ' % ' + file[0].name;
-                        }
-                    }, false);
-                    return xhr;
-                },
-                url: '{% url "upload" %}',
-                contentType: false,
-                type: 'POST',
-                dataType: 'json',
-                processData: false,
-                data: data,
-                success: function (resultData) {
-                    document.getElementById("js-upload-finished-list").innerHTML = '<a href="#" ' +
-                        'class="list-group-item list-group-item-success">' +
-                        '<span class="badge alert-success pull-right"' +
-                        '>{% trans "Success" %}</span>' + file[0].name + '</a>';
-                    get_files(loc);
-                },
-                error: function (resultData) {
-                    document.getElementById("js-upload-finished-list").innerHTML = '<a href="#" ' +
-                        'class="list-group-item list-group-item-danger">' +
-                        '<span class="badge alert-danger pull-right"' +
-                        '>{% trans "Fail" %}</span>' + file[0].name + '</a>';
-                    get_files(loc);
-                }
+                        // refresh
+                        refresh_folder();
+                    },
+                    error: function (resultData) {
+                        document.getElementById("js-upload-finished-list").innerHTML += '<a href="#" ' +
+                            'class="list-group-item list-group-item-danger">' +
+                            '<span class="badge alert-danger pull-right"' +
+                            '>{% trans "Fail" %}</span>' + file.name + '</a>';
+                    }
+                });
             });
+            get_files(loc);
         };
 
         uploadForm.addEventListener('submit', function (e) {
@@ -780,7 +786,10 @@
 </script>
 <script>
     $(document).ready(function () {
+<<<<<<< HEAD
         $('.progress').hide();
+=======
+>>>>>>> parent of cfd2428... Merge pull request #2 from khuropbox/dev
         get_files("-");
     });
 
@@ -799,7 +808,7 @@
             data: data,
         });
         $('#collapseCreateFolder').collapse("hide");
-        refresh_folder();
+        get_files(loc);
     }
 
     function sort_a_z(d) {
@@ -812,7 +821,7 @@
             $(d).attr("data-sort", "a-z");
             sort_a_z_value = true;
         }
-        refresh_folder();
+        get_files(loc);
     }
 
     function select_file(d) {
@@ -845,7 +854,7 @@
             data: data,
             success: function (resultData) {
                 copy_selected_file_list = [];
-                refresh_folder();
+                get_files(loc);
             },
         });
     }
@@ -860,7 +869,7 @@
             dataType: 'json',
             data: data,
             success: function (resultData) {
-                refresh_folder();
+                get_files(loc);
             },
         });
     }
@@ -906,9 +915,12 @@
         selected_file_list = [];
         $('#top_folder').attr("data-top_folder", $('#location').attr("data-location"));
         $('#location').attr("data-location", main_folder);
+<<<<<<< HEAD
         
         $('#current').html('현재 위치 ' + main_folder);
 
+=======
+>>>>>>> parent of cfd2428... Merge pull request #2 from khuropbox/dev
         $(".pb-filemng-template-body").empty();
         var get_files_url = "{% url 'get_folder_items' "arg1djs3server" "sort_a_z" %}".replace(/arg1djs3server/, main_folder.toString()).replace(/sort_a_z/, sort_a_z_value);
         $.getJSON(
