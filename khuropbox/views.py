@@ -2,9 +2,12 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.shortcuts import render, redirect
 from django.core.exceptions import PermissionDenied
+from CognitoAuth import Cognito
 
 import django
-import warrant
+import settings
+import CognitoAuth
+
 
 def index(request):
     if request.user.is_authenticated:
@@ -21,11 +24,18 @@ def login(request):
                 return render(request, "login.html", {
                     "message": "아이디와 비밀번호를 입력해 주세요"
                 })
-            user = authenticate(username=request.POST['username'], password=request.POST['password'])
-            # cognito authentication needed
-            # authenticate with folder of user
+
+            un = request.POST['username']
+            pw = request.POST['password']
+
+            user = authenticate(username=un, password=pw)
+
             if user is not None:
                 auth = django.contrib.auth.login(request, user)
+                cog = CognitoAuth.Cognito()
+                userCredential = cog.sign_in_admin(username=un, password=pw)
+                cog.SetUserCredential(userCredential)
+
                 return redirect('/')
             else:
                 return render(request, "login.html", {
@@ -37,9 +47,11 @@ def login(request):
 def logout(request):
     if request.user.is_authenticated:
         django.contrib.auth.logout(request)
+
     return redirect("/")
 
 def register(request):
+    Cog = Cognito()
     if request.user.is_authenticated: raise PermissionDenied
     if request.method == "POST":
         require_keys = ('username', 'password', 'first_name', 'last_name', 'email')
@@ -60,6 +72,17 @@ def register(request):
                 last_name=request.POST['last_name'],
                 email=request.POST['email']
             )
+
+            Cog.sign_up(
+                        username=request.POST['username'],
+                        password=request.POST['password'],
+                        email=request.POST['email'],
+                        UserAttributes=[
+                            {
+                            'FirstName' : request.POST['first_name'],
+                            'LastName' : request.POST['last_name']
+                            },
+                        ])
 
             return redirect('/')
         else:

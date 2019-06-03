@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'djangoS3Browser',
-    'blog'
+    'blog',
+    'warrant'
 ]
 
 MIDDLEWARE = [
@@ -157,13 +158,3 @@ control = 'max-age=%d, s-maxage=%d, must-revalidate' % (AWS_EXPIRY, AWS_EXPIRY)
 AWS_HEADERS = {
     'Cache-Control': bytes(control, encoding='latin-1')
 }
-
-# add the dotted path of CognitoBackend to your list of AUTHENTICATION_BACKENDS
-# https://github.com/MetaMetricsInc/django-warrant
-
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'django_warrant.backend.CognitoBackend',
-
-]
-
