@@ -23,21 +23,17 @@
 
 - [x] AWS 플랫폼 DB 기반(MySQL 예정) migration 연동
 
-- [ ] 외부인과 파일 공유, Session Problem
+- [x] 외부인과 파일 공유, Session Problem
 
-- [ ] 도커 가상화(Dockerfile) 예정
+- [x] Auto Scaling Group와 Elastic Load Balancing을 사용한 부하분산처리
 
-- [ ] Elastic Beanstalk와 Elastic Load Balancing을 사용한 부하분산처리
+- [x] 게시판 및 댓글 기능, DB 구조화
 
-- [ ] 게시판 및 댓글 기능, DB 구조화
+- [x] S3에서 파일 이름으로 인한 검색
 
-- [ ] S3에서 파일 이름으로 인한 검색
+- [x] 사용자 마다 Bucket 폴더 나누기, 회원가입시 고유 Bucket 폴더 생성
 
-- [ ] 사용자 마다 Bucket 나누기, 회원가입시 고유 Bucket 생성
-
-- [ ] S3 Bucket에 대한 DB 구조화
-
-- [ ] 대용량 파일 업로드에 대한 aws cognito 설정
+- [x] 대용량 파일 업로드에 대한 aws cognito 설정
 
   
 
@@ -58,57 +54,44 @@ $ source env/bin/activate
 
 $ pip3 install -r requirement.txt
 
+$ vim config.ini
+[db]
+ENGINE = django.db.backends.postgresql
+HOST = RDS_hostnae
+PORT = RDS_port
+NAME = RDS_name
+USER = RDS_user
+PASSWORD = RDS_password
+
+[aws]
+AWS_ACCESS_KEY_ID = your_key
+AWS_SECRET_ACCESS_KEY = your_secret_key
+AWS_STORAGE_BUCKET_NAME = your_bucket_name
+
+
 $ python manage.py migrate
 $ python manage.py runserver 0:8000
 ```
 
 
 
-## 개발 환경 설정 방법
-
-1. `Ubuntu Server 16.04 LTS (HVM), SSD Volume Type`으로 ec2를 만듭니다.
-
-2. ec2 보안 그룹의 8000번 포트를 열어 줍니다.
-
-3. `ssh -i your_pem_key.pem ubuntu@server_ip` 
-
-4. `$ git clone -b dev --single-branch https://github.com/khuropbox/khuropbox`
-
-5. `$ sudo apt-get update`
-
-6. `$ sudo apt install virtualenv python3-pip`
-
-7. `$ pip3 install virtualenv`
-
-8. `$ ln -s /home/ubuntu/.local/bin/virtualenv virtualenv`
-
-9. `$ ./virtualenv env`
-
-10. `$ source env/bin/activate`
-
-11. `$ pip3 install -r requirement.txt`
-
-12. `$ vim config.ini`
-
-    ```ini
-    [aws]
-    AWS_ACCESS_KEY_ID = your_access_key
-    AWS_SECRET_ACCESS_KEY = your_secret_access_key
-    AWS_STORAGE_BUCKET_NAME = bucket_name
-    ```
-
-13. `$ python manage.py migrate`
-
-14. `$ python manage.py runserver 0:8000`
-
-15. 크롬 창에서 `serverip:8000` 으로 접속하면 됩니다.
-
 
 ## Dependancy
 
-- django==2.1.7
-- Pillow==5.4.1
+- boto3==1.9.145
+- botocore==1.12.146
+- Django==2.1.7
 - djangorestframework==3.9.2
+- docutils==0.14
+- jmespath==0.9.4
+- Pillow==5.4.1
+- psycopg2==2.8.2
+- python-dateutil==2.8.0
+- pytz==2019.1
+- s3transfer==0.2.0
+- six==1.12.0
+- urllib3==1.24.3
+
 
 
 
