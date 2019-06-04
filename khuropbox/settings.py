@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'djangoS3Browser',
-    'blog',
+    'blog'
 ]
 
 MIDDLEWARE = [
@@ -81,7 +81,6 @@ TEMPLATES = [
         },
     },
 ]
-
 WSGI_APPLICATION = 'khuropbox.wsgi.application'
 
 
@@ -158,4 +157,3 @@ control = 'max-age=%d, s-maxage=%d, must-revalidate' % (AWS_EXPIRY, AWS_EXPIRY)
 AWS_HEADERS = {
     'Cache-Control': bytes(control, encoding='latin-1')
 }
-
