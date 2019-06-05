@@ -106,7 +106,7 @@
                                            placeholder="{% trans "File Name" %}">
                                 </div>
                                 <button type="button" class="btn btn-sm btn-primary"
-                                        onclick="search_folder()">{% trans "Search" %}</button>
+                                        onclick="search_folder($('#location').attr('data-location'))">{% trans "Search" %}</button>
                             </div>
                         </div>
                     </div>
@@ -265,20 +265,17 @@
         refresh_folder();
     }
 
-    function search_folder() {
-        var main_folder = $('#location').attr("data-location");
+    function search_folder(main_folder) {
         var file_name = $('#searched_folder_name').val();
-
-        $('#top_folder').attr("data-top_folder", $('#location').attr("data-location"));
-        $('#location').attr("data-location", main_folder);
-
-        $('#current').html('현재 위치 ' + main_folder);
 
         $(".pb-filemng-template-body").empty();
         var get_files_url = "{% url 'get_folder_items' "arg1djs3server" "sort_a_z" %}".replace(/arg1djs3server/, main_folder.toString()).replace(/sort_a_z/, sort_a_z_value);
         $.getJSON(
             get_files_url, function (files_list) {
                 for (var key in files_list) {
+                    if ('folder' == files_list[key].type) {
+                        search_folder(main_folder + files_list[key].text);
+                    }
                     if (files_list[key].text.indexOf(file_name) === -1) continue;
 
                     target = "";
@@ -295,9 +292,6 @@
                         '<span class="hide location-info">' + main_folder + files_list[key].text + '</span>' +
                         '</div>'
                     );
-                }
-                if (1 > files_list.length) {
-                    $(".pb-filemng-template-body").append('<p style="text-align:center">{% trans "Folder is Empty" %}</p>');
                 }
             });
 
