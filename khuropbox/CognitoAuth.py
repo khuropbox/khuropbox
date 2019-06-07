@@ -3,11 +3,11 @@ import boto3
 # https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cognito-idp.html#id108
 
 class Cognito():
-    region = 'ap-northeast-2'
-    user_pool_id = 'ap-northeast-2_18Hv3iQNF'
-    app_client_id = '4htfacvbpel4o9dlhdq10f032j'
-    identity_pool_id = 'ap-northeast-2:7355f3db-8b2a-4548-9a56-becce8221aee'
-    account_id = '394159111897'
+    region = 'us-west-2'
+    user_pool_id = 'us-west-2_2wqn8wLUE'
+    app_client_id = '3qbuc7gaje6nftsqa7aduptnfn'
+    identity_pool_id = 'us-west-2:bfca573d-3cfc-42c7-8310-ff9c0218101d'
+    account_id = 'wjdekdms001'
     token = ''
 
     def sign_up(self, username, password, UserAttributes):
