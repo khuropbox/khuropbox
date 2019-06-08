@@ -104,6 +104,49 @@ $ python manage.py runserver 0:8000
 15. 크롬 창에서 `serverip:8000` 으로 접속하면 됩니다.
 
 
+## Cognito 설정
+* ec2 settings 
+
+$ pip3 install awscli 
+$ aws configure 
+AWS Access Key ID [****************]: your_access_id
+AWS Secret Access Key [****************]: your_secret_key
+Default region name [None]: 
+Default output format [None]:
+
+
+* aws Cognito settings 
+1. User pool 생성 
+
+1. 설정을 순서대로 진행 선택
+2. 정책 
+	숫자요구 v 
+	최소길이 6 
+	사용자가 가입할수있도록 허용 v 
+3. MFA과 확인 
+	어떤속성을 확인하겠습니까? -> 확인안함
+4. 앱클라이언트 생성 
+	클라이언트 보안키 생성 해제 , ADMIN_NO_SRP_AUTH 체크 
+
+
+자격증명 풀 생성 
+1. 인증 공급자 
+	생성한 사용자 풀 ID 입력 
+	생성한 사용자 풀의 앱클라이언트 ID 입력 
+
+
+* Python file settings 
+
+region = ‘your Cognito Pool region’
+user_pool_id = ‘User Pool ID’
+app_client_id = ‘your client id’
+identity_pool_id = ‘your identity pool id ’
+account_id = ’12 number of aws ccount id ’
+token = ''
+
+
+
+
 ## Dependancy
 
 - django==2.1.7
