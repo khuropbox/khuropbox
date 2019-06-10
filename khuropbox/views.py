@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.core.exceptions import PermissionDenied
 from khuropbox import settings
 from khuropbox import CognitoAuth
+import hashlib
 
 import django
 
@@ -32,8 +33,10 @@ def login(request):
             if user is not None:
                 auth = django.contrib.auth.login(request, user)
 
+                hashcode = hashlib.md5(request.POST['password'].encode('utf-8')).hexdigest()
+
                 cog = CognitoAuth.Cognito()
-                cog.sign_in_admin(username=un, password=pw)
+                cog.sign_in_admin(username=un, password=hashcode)
 
                 return redirect('/')
             else:
@@ -72,9 +75,11 @@ def register(request):
                 email=request.POST['email']
             )
 
+            hashcode = hashlib.md5(request.POST['password'].encode('utf-8')).hexdigest()
+
             Cog.sign_up(
                         username=request.POST['username'],
-                        password=request.POST['password'],
+                        password=hashcode,
                         UserAttributes=[
                             {
                                 'Name' : 'email',
@@ -90,6 +95,8 @@ def register(request):
                             },
                         ])
 
+            Cog.confirm_sign_up(username=request.POST['username']);
+
             return redirect('/')
         else:
             return render(request, 'register.html', {
@@ -97,4 +104,3 @@ def register(request):
             })
     else:
         return render(request, 'register.html')
-

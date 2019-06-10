@@ -1,33 +1,44 @@
 import boto3
+import configparser
+
+config = configparser.ConfigParser()
+config.read('config.ini')
 
 # https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cognito-idp.html#id108
 
 class Cognito():
-    region = 'ap-northeast-2'
-    user_pool_id = 'ap-northeast-2_18Hv3iQNF'
-    app_client_id = '4htfacvbpel4o9dlhdq10f032j'
-    identity_pool_id = 'ap-northeast-2:7355f3db-8b2a-4548-9a56-becce8221aee'
-    account_id = '394159111897'
+    region = config['cognito']['region']
+    user_pool_id = config['cognito']['user_pool_id']
+    app_client_id = config['cognito']['app_client_id']
+    identity_pool_id = config['cognito']['identity_pool_id']
+    account_id = config['cognito']['account_id']
     token = ''
 
     def sign_up(self, username, password, UserAttributes):
-        client = boto3.client('cognito-idp', self.region)
+        client = boto3.client('cognito-idp', self.region,
+                            aws_access_key_id=config['aws']['AWS_ACCESS_KEY_ID'],
+                            aws_secret_access_key=config['aws']['AWS_SECRET_ACCESS_KEY'])
+
         response = client.sign_up(ClientId=self.app_client_id,
                                   Username=username,
                                   Password=password,
                                   UserAttributes=UserAttributes)
         return response
 
-    def confirm_sign_up(self, username, confirm_code):
-        client = boto3.client('cognito-idp', self.region)
-        response = client.confirm_sign_up(ClientId=self.app_client_id,
-                                          Username=username,
-                                          ConfirmationCode=confirm_code)
+    def confirm_sign_up(self, username):
+        client = boto3.client('cognito-idp', self.region,
+                            aws_access_key_id=config['aws']['AWS_ACCESS_KEY_ID'],
+                            aws_secret_access_key=config['aws']['AWS_SECRET_ACCESS_KEY'])
+
+        response = client.admin_confirm_sign_up(UserPoolId=self.user_pool_id, Username=username)
         return response
 
     def sign_in_admin(self, username, password):
         # Get ID Token
-        idp_client = boto3.client('cognito-idp', self.region)
+        idp_client = boto3.client('cognito-idp', self.region,
+                            aws_access_key_id=config['aws']['AWS_ACCESS_KEY_ID'],
+                            aws_secret_access_key=config['aws']['AWS_SECRET_ACCESS_KEY'])
+
         response = idp_client.admin_initiate_auth(UserPoolId=self.user_pool_id,
                                               ClientId=self.app_client_id,
                                               AuthFlow='ADMIN_NO_SRP_AUTH',
@@ -37,7 +48,10 @@ class Cognito():
         self.token = response['AuthenticationResult']['IdToken']
 
         # Get IdentityId
-        ci_client = boto3.client('cognito-identity', self.region)
+        ci_client = boto3.client('cognito-identity', self.region,
+                            aws_access_key_id=config['aws']['AWS_ACCESS_KEY_ID'],
+                            aws_secret_access_key=config['aws']['AWS_SECRET_ACCESS_KEY'])
+
         response = ci_client.get_id(AccountId=self.account_id,
                                 IdentityPoolId=self.identity_pool_id,
                                 Logins={provider: self.token})
