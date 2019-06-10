@@ -203,7 +203,12 @@
                         queueSize : 1
                     }
                 ).on("httpUploadProgress", function (progress) {
-                    console.log(progress.loaded + " of " + progress.total + " bytes");
+                    var percentComplete = (progress.loaded / progress.total * 100 | 0);
+                    var progress_bar = document.getElementById("progress-bar");
+                    var progress_bar_rate = document.getElementById("progress-bar-rate");
+                    progress_bar.style.width = percentComplete + '%';
+                    progress_bar_rate.innerHTML = percentComplete + ' % ' + file[0].name;
+
                 }).send(function(err, data) {
                     document.getElementById("js-upload-finished-list").innerHTML = '<a href="#" ' +
                         'class="list-group-item list-group-item-success">' +
