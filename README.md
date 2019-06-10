@@ -68,6 +68,12 @@ AWS_ACCESS_KEY_ID = your_key
 AWS_SECRET_ACCESS_KEY = your_secret_key
 AWS_STORAGE_BUCKET_NAME = your_bucket_name
 
+[cognito]
+region = ap-northeast-2
+user_pool_id = 
+app_client_id = 
+identity_pool_id = 
+account_id = 
 
 $ python manage.py migrate
 $ python manage.py runserver 0:8000
