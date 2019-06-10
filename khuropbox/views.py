@@ -2,8 +2,11 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.shortcuts import render, redirect
 from django.core.exceptions import PermissionDenied
+from khuropbox import settings
+from khuropbox import CognitoAuth
 
 import django
+
 
 def index(request):
     if request.user.is_authenticated:
@@ -20,9 +23,18 @@ def login(request):
                 return render(request, "login.html", {
                     "message": "아이디와 비밀번호를 입력해 주세요"
                 })
-            user = authenticate(username=request.POST['username'], password=request.POST['password'])
+
+            un = request.POST['username']
+            pw = request.POST['password']
+
+            user = authenticate(username=un, password=pw)
+
             if user is not None:
                 auth = django.contrib.auth.login(request, user)
+
+                cog = CognitoAuth.Cognito()
+                cog.sign_in_admin(username=un, password=pw)
+
                 return redirect('/')
             else:
                 return render(request, "login.html", {
@@ -34,9 +46,11 @@ def login(request):
 def logout(request):
     if request.user.is_authenticated:
         django.contrib.auth.logout(request)
+
     return redirect("/")
 
 def register(request):
+    Cog = CognitoAuth.Cognito()
     if request.user.is_authenticated: raise PermissionDenied
     if request.method == "POST":
         require_keys = ('username', 'password', 'first_name', 'last_name', 'email')
@@ -58,6 +72,24 @@ def register(request):
                 email=request.POST['email']
             )
 
+            Cog.sign_up(
+                        username=request.POST['username'],
+                        password=request.POST['password'],
+                        UserAttributes=[
+                            {
+                                'Name' : 'email',
+                                'Value' : request.POST['email'],
+                            },
+                            {
+                                'Name' : 'family_name',
+                                'Value': request.POST['first_name'],
+                            },
+                            {
+                                'Name' : 'given_name',
+                                'Value': request.POST['last_name'],
+                            },
+                        ])
+
             return redirect('/')
         else:
             return render(request, 'register.html', {
@@ -65,3 +97,4 @@ def register(request):
             })
     else:
         return render(request, 'register.html')
+
