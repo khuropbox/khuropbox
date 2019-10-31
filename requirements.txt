@@ -4,7 +4,7 @@ Django==2.1.7
 djangorestframework==3.9.2
 docutils==0.14
 jmespath==0.9.4
-Pillow==5.4.1
+Pillow==6.2.0
 psycopg2==2.8.2
 python-dateutil==2.8.0
 pytz==2019.1
